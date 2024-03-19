@@ -1,18 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=8 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
 [ext_resource type="Script" path="res://Scripts/PreProduction/BoardCreator.gd" id="2_c7doe"]
+[ext_resource type="Script" path="res://Scripts/Common/State Machine/StateMachine.gd" id="2_lgpnl"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/InitBattleState.gd" id="3_nwvsw"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/MoveTargetState.gd" id="4_2n2ph"]
 [ext_resource type="Script" path="res://Scripts/Controller/CameraController.gd" id="4_85yja"]
-[ext_resource type="Script" path="res://Scripts/Test/Test.gd" id="5_cfr8g"]
 
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "stateMachine", "startState")]
 script = ExtResource("1_jg3qk")
 board = NodePath("Board")
 inputController = NodePath("Input Controller")
 cameraController = NodePath("Camera Controller")
+stateMachine = NodePath("State Machine")
+startState = NodePath("State Machine/Init Battle State")
+
+[node name="State Machine" type="Node" parent="Battle Controller"]
+script = ExtResource("2_lgpnl")
+
+[node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState")]
+script = ExtResource("3_nwvsw")
+moveTargetState = NodePath("../Move Target State")
+
+[node name="Move Target State" type="Node" parent="Battle Controller/State Machine"]
+script = ExtResource("4_2n2ph")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_6a0kt")
@@ -36,6 +50,3 @@ transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 projection = 1
 size = 10.0
-
-[node name="Test" type="Node" parent="Battle Controller"]
-script = ExtResource("5_cfr8g")

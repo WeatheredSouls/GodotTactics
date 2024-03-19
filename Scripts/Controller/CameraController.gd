@@ -1,8 +1,6 @@
 extends Node
 class_name CameraController
 
-var _owner: BattleController
-
 @export var _followSpeed: float = 3.0
 var _follow: Node3D
 
@@ -13,14 +11,6 @@ var _zoom = 10
 var _minPitch = -90
 var _maxPitch = 0
 
-func _ready():
-	_owner = get_node("../")
-	Zoom(0)
-	AddListeners()
-	
-func _exit_tree():
-	RemoveListeners()
-
 func _process(delta):
 	if _follow:
 		self.position = self.position.lerp(_follow.position, _followSpeed * delta)
@@ -29,14 +19,6 @@ func setFollow(follow: Node3D):
 	if follow:
 		_follow = follow
 	
-func AddListeners():
-	_owner.inputController.cameraZoomEvent.connect(Zoom)
-	_owner.inputController.cameraRotateEvent.connect(Orbit)
-
-func RemoveListeners():
-	_owner.inputController.cameraZoomEvent.disconnect(Zoom)
-	_owner.inputController.cameraRotateEvent.disconnect(Orbit)
-
 func Zoom(scroll: int):
 	_zoom = clamp(_zoom + scroll,_minZoom, _maxZoom )
 	

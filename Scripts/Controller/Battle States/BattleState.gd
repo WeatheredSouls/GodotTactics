@@ -1,37 +1,42 @@
-extends Node
+extends State
+class_name BattleState
 
 var _owner: BattleController
 
 func _ready():
-	_owner = get_node("../")
-	
-	var saveFile = _owner.board.savePath + _owner.board.fileName
-	_owner.board.LoadMap(saveFile)
-	
-	_owner.cameraController.setFollow(_owner.board.marker)
-	
-	AddListeners()
-	
-func _exit_tree():
-	RemoveListeners()
+	_owner = get_node("../../")
 
 func AddListeners():
 	_owner.inputController.moveEvent.connect(OnMove)
 	_owner.inputController.fireEvent.connect(OnFire)
 	_owner.inputController.quitEvent.connect(OnQuit)
+	_owner.inputController.cameraZoomEvent.connect(Zoom)
+	_owner.inputController.cameraRotateEvent.connect(Orbit)
 
 func RemoveListeners():
 	_owner.inputController.moveEvent.disconnect(OnMove)
 	_owner.inputController.fireEvent.disconnect(OnFire)
 	_owner.inputController.quitEvent.disconnect(OnQuit)
+	_owner.inputController.cameraZoomEvent.disconnect(Zoom)
+	_owner.inputController.cameraRotateEvent.disconnect(Orbit)
 
 func OnMove(e:Vector2i):
-	var rotatedPoint = _owner.cameraController.AdjustedMovement(e)
-	_owner.board.pos += rotatedPoint
-	
+	pass
+
 func OnFire(e:int):
-	print("Fire: " + str(e))
+	pass
+
+func Zoom(scroll: int):
+	pass
+		
+func Orbit(direction: Vector2):
+	pass
+
+func SelectTile(p:Vector2i):
+	if _owner.board.pos == p:
+		return
+	
+	_owner.board.pos = p
 	
 func OnQuit():
 	get_tree().quit()
-
