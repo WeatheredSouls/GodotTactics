@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=10 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/Controller/Battle States/InitBattleState.gd" id="3_nwvsw"]
 [ext_resource type="Script" path="res://Scripts/Controller/Battle States/MoveTargetState.gd" id="4_2n2ph"]
 [ext_resource type="Script" path="res://Scripts/Controller/CameraController.gd" id="4_85yja"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/SelectUnitState.gd" id="5_i2eso"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/MoveSequenceState.gd" id="6_xkkv4"]
 
 [node name="Battle" type="Node3D"]
 
@@ -21,12 +23,21 @@ startState = NodePath("State Machine/Init Battle State")
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_lgpnl")
 
-[node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState")]
+[node name="Init Battle State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("selectUnitState")]
 script = ExtResource("3_nwvsw")
+selectUnitState = NodePath("../Select Unit State")
+
+[node name="Move Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("MoveSequenceState")]
+script = ExtResource("4_2n2ph")
+MoveSequenceState = NodePath("../Move Sequence State")
+
+[node name="Select Unit State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState")]
+script = ExtResource("5_i2eso")
 moveTargetState = NodePath("../Move Target State")
 
-[node name="Move Target State" type="Node" parent="Battle Controller/State Machine"]
-script = ExtResource("4_2n2ph")
+[node name="Move Sequence State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("SelectUnitState")]
+script = ExtResource("6_xkkv4")
+SelectUnitState = NodePath("../Select Unit State")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_6a0kt")
