@@ -32,5 +32,5 @@ func SpawnTestUnits():
 		var m = unit.get_node("Movement")
 		m.set_script(components[i])
 		m.range = 5
-		m.jumpHeight = 5
+		m.jumpHeight = 1
 		m.set_process(true)
