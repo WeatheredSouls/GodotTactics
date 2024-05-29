@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ConversationData" load_steps=8 format=3 uid="uid://bxirdw58gmiwt"]
+
+[ext_resource type="Script" path="res://Scripts/Model/SpeakerData.gd" id="1_8oseh"]
+[ext_resource type="Texture2D" uid="uid://bw7tib5ocvpwl" path="res://Textures/UI/EvilAvatar.png" id="2_f0cql"]
+[ext_resource type="Texture2D" uid="uid://biu741lehhl8s" path="res://Textures/UI/Avatar.png" id="3_jkltn"]
+[ext_resource type="Script" path="res://Scripts/Model/ConversationData.gd" id="4_rd1rs"]
+
+[sub_resource type="Resource" id="Resource_wjqjk"]
+script = ExtResource("1_8oseh")
+speaker = ExtResource("2_f0cql")
+anchor = 1
+messages = Array[String](["VILLAIN_1A", "VILLAIN_1B", "VILLAIN_1C"])
+
+[sub_resource type="Resource" id="Resource_d6ong"]
+script = ExtResource("1_8oseh")
+speaker = ExtResource("3_jkltn")
+anchor = 2
+messages = Array[String](["HERO_1A", "HERO_1B"])
+
+[sub_resource type="Resource" id="Resource_lft1l"]
+script = ExtResource("1_8oseh")
+speaker = ExtResource("2_f0cql")
+anchor = 1
+messages = Array[String](["VILLAIN_2A"])
+
+[resource]
+script = ExtResource("4_rd1rs")
+list = Array[ExtResource("1_8oseh")]([SubResource("Resource_wjqjk"), SubResource("Resource_d6ong"), SubResource("Resource_lft1l")])

@@ -94,6 +94,6 @@ func MoveToAnchorPosition(myAnchor:Control.LayoutPreset, parentAnchor:Control.La
 
 func ToAnochorPosition(anchor:PanelAnchor,animated:bool):
 	if animated:
-		MoveToAnchorPosition(anchor.myAnchor, anchor.parentAnchor, anchor.offset, anchor.duration, anchor.trans, anchor.anchorEase)
+		await MoveToAnchorPosition(anchor.myAnchor, anchor.parentAnchor, anchor.offset, anchor.duration, anchor.trans, anchor.anchorEase)
 	else:
 		SnapToAnchorPosition(anchor.myAnchor, anchor.parentAnchor, anchor.offset)

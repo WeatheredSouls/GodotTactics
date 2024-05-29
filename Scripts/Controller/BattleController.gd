@@ -4,6 +4,7 @@ class_name BattleController
 @export var board: BoardCreator
 @export var inputController: InputController
 @export var cameraController: CameraController
+@export var conversationController: ConversationController
 
 @export var stateMachine: StateMachine
 @export var startState: State
