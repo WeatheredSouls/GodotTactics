@@ -6,10 +6,10 @@ uid="uid://b462cp0mabiyt"
 
 [deps]
 
-files=["res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.jp.translation", "res://Data/Conversations/Translations/IntroScene.es.translation"]
+files=["res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.ja.translation", "res://Data/Conversations/Translations/IntroScene.es.translation"]
 
 source_file="res://Data/Conversations/Translations/IntroScene.csv"
-dest_files=["res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.jp.translation", "res://Data/Conversations/Translations/IntroScene.es.translation"]
+dest_files=["res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.ja.translation", "res://Data/Conversations/Translations/IntroScene.es.translation"]
 
 [params]
 

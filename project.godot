@@ -128,4 +128,4 @@ camera_activate={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.es.translation", "res://Data/Conversations/Translations/IntroScene.jp.translation")
+locale/translations=PackedStringArray("res://Data/Conversations/Translations/IntroScene.en.translation", "res://Data/Conversations/Translations/IntroScene.es.translation", "res://Data/Conversations/Translations/IntroScene.ja.translation")

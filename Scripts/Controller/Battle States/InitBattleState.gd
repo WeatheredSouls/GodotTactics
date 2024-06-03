@@ -16,7 +16,7 @@ func Init():
 	
 	_owner.cameraController.setFollow(_owner.board.marker)
 	
-	TranslationServer.set_locale("jp")
+	TranslationServer.set_locale("ja")
 	#TranslationServer.set_locale("en")
 	#TranslationServer.set_locale("es")
 	
