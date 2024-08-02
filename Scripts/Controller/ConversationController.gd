@@ -65,7 +65,7 @@ func Sequence(data:ConversationData):
 		
 		#Hide panel and wait for it to get off screen
 		inTransition = true
-		await currentPanel.ToAnochorPosition(hide, false)
+		await currentPanel.ToAnochorPosition(hide, true)
 		
 	_DisableNode(leftPanel)
 	_DisableNode(rightPanel)

@@ -9,8 +9,11 @@ class_name BattleController
 @export var stateMachine: StateMachine
 @export var startState: State
 
+@export var abilityMenuPanelController:AbilityMenuPanelController
+var turn:Turn = Turn.new()
+var units:Array[Unit] = []
+
 var heroPrefab = preload("res://Prefabs/Hero.tscn")
-var currentUnit:Unit
 
 var currentTile:Tile: 
 	get: return board.GetTile(board.pos)

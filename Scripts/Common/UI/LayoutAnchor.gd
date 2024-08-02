@@ -1,4 +1,4 @@
-extends Panel
+extends Node
 class_name LayoutAnchor
 
 func GetParentAnchor(anchor: Control.LayoutPreset) -> Vector2:

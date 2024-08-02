@@ -3,6 +3,18 @@ class_name BattleState
 
 var _owner: BattleController
 
+var abilityMenuPanelController:AbilityMenuPanelController:
+	get:
+		return _owner.abilityMenuPanelController
+
+var turn:Turn: 
+	get:
+		return _owner.turn
+
+var units:Array[Unit]:
+	get:
+		return _owner.units
+
 func _ready():
 	_owner = get_node("../../")
 
