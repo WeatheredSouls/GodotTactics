@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://rpqvbc7vxot"]
+
+[ext_resource type="Script" path="res://addons/PreProduction/ParseJobs.gd" id="1_kg5gl"]
+
+[node name="Pre Production" type="VBoxContainer"]
+
+[node name="ParseJobs" type="Button" parent="."]
+layout_mode = 2
+text = "Parse Jobs"
+script = ExtResource("1_kg5gl")
+
+[connection signal="pressed" from="ParseJobs" to="ParseJobs" method="_on_pressed"]

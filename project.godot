@@ -26,7 +26,7 @@ project/assembly_name="LiquidFire Tactics"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BoardCreatorInspector/plugin.cfg")
+enabled=PackedStringArray("res://addons/BoardCreatorInspector/plugin.cfg", "res://addons/PreProduction/plugin.cfg")
 
 [input]
 
