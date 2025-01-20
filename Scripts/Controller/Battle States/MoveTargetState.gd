@@ -9,15 +9,18 @@ func Enter():
 	var mover:Movement = turn.actor.get_node("Movement")
 	tiles = mover.GetTilesInRange(_owner.board)
 	_owner.board.SelectTiles(tiles)
+	RefreshPrimaryStatPanel(_owner.board.pos)
 
 func Exit():
 	super()
 	_owner.board.DeSelectTiles(tiles)
 	tiles = null
+	await statPanelController.HidePrimary()
 
 func OnMove(e:Vector2i):
 	var rotatedPoint = _owner.cameraController.AdjustedMovement(e)
 	SelectTile(rotatedPoint + _owner.board.pos)
+	RefreshPrimaryStatPanel(_owner.board.pos)
 
 func OnFire(e:int):
 	if e == 0:

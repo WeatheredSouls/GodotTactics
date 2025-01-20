@@ -5,6 +5,14 @@ extends BaseAbilityMenuState
 @export var selectUnitState: State
 @export var exploreState: State
 
+func Enter():
+	super()
+	statPanelController.ShowPrimary(turn.actor)
+
+func Exit():
+	super()
+	await statPanelController.HidePrimary()
+
 func LoadMenu():
 	if(menuOptions.size() == 0):
 		menuTitle = "Commands"

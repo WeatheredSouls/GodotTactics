@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfceluyv7hw0d"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Actor/Job.gd" id="1_qw3ab"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Features/StatModifierFeature.gd" id="2_2hmsu"]
+
+[node name="Job" type="Node"]
+script = ExtResource("1_qw3ab")
+baseStats = Array[int]([43, 5, 61, 89, 11, 58, 100])
+growStats = Array[float]([8.4, 0.8, 8.8, 9.2, 1.1, 7.6, 1.1])
+
+[node name="SMF_MOV" type="Node" parent="."]
+script = ExtResource("2_2hmsu")
+type = 13
+amount = 4
+
+[node name="SMF_JMP" type="Node" parent="."]
+script = ExtResource("2_2hmsu")
+type = 14
+amount = 1

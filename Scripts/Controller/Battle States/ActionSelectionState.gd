@@ -6,6 +6,14 @@ static var category:int
 var whiteMagicOptions:Array[String] = ["Cure", "Raise"]
 var blackMagicOptions:Array[String] = ["Fire", "Ice", "Lightning", "Poison"]
 
+func Enter():
+	super()
+	statPanelController.ShowPrimary(turn.actor)
+
+func Exit():
+	super()
+	await statPanelController.HidePrimary()
+
 func LoadMenu():
 	if(category == 0):
 		menuTitle = "White Magic"

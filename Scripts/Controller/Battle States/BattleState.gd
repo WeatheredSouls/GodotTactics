@@ -15,6 +15,10 @@ var units:Array[Unit]:
 	get:
 		return _owner.units
 
+var statPanelController:StatPanelController:
+	get:
+		return _owner.statPanelController
+
 func _ready():
 	_owner = get_node("../../")
 
@@ -49,6 +53,26 @@ func SelectTile(p:Vector2i):
 		return
 	
 	_owner.board.pos = p
-	
+
+func GetUnit(p:Vector2i):
+	var t:Tile = _owner.board.GetTile(p)
+	if t== null || t.content == null:
+		return null
+	return t.content
+
+func RefreshPrimaryStatPanel(p:Vector2i):
+	var target:Unit = GetUnit(p)
+	if target != null:
+		statPanelController.ShowPrimary(target)
+	else:
+		statPanelController.HidePrimary()
+
+func RefreshSecondaryStatPanel(p:Vector2i):
+	var target:Unit = GetUnit(p)
+	if target != null:
+		statPanelController.ShowSecondary(target)
+	else:
+		statPanelController.HideSecondary()
+
 func OnQuit():
 	get_tree().quit()

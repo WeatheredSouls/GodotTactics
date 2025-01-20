@@ -10,6 +10,8 @@ class_name BattleController
 @export var startState: State
 
 @export var abilityMenuPanelController:AbilityMenuPanelController
+@export var statPanelController:StatPanelController
+
 var turn:Turn = Turn.new()
 var units:Array[Unit] = []
 
