@@ -7,6 +7,7 @@ var hasUnitActed:bool
 var lockMove:bool
 var startTile:Tile
 var startDir: Directions.Dirs
+var ability: Node
 
 func Change(current:Unit):
 	actor = current

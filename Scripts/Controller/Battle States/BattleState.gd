@@ -15,6 +15,14 @@ var units:Array[Unit]:
 	get:
 		return _owner.units
 
+var pos:Vector2i:
+	get:
+		return _owner.board.pos
+
+var board:BoardCreator:
+	get:
+		return _owner.board
+
 var statPanelController:StatPanelController:
 	get:
 		return _owner.statPanelController

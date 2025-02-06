@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=62 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/Controller/ConversationController.gd" id="10_3i1al"]
 [ext_resource type="Script" path="res://Scripts/Controller/Battle States/CategorySelectionState.gd" id="10_6alih"]
 [ext_resource type="Script" path="res://Scripts/Controller/Battle States/ExploreState.gd" id="11_fj250"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/AbilityTargetState.gd" id="12_2punj"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/ConversationPanel.gd" id="12_3j4sj"]
 [ext_resource type="Script" path="res://Scripts/Common/UI/PanelAnchor.gd" id="13_4akxu"]
 [ext_resource type="Texture2D" uid="uid://0tyk6cjeapi" path="res://Textures/UI/ConversationPanel.png" id="13_v33yy"]
@@ -336,14 +337,20 @@ categorySelectionState = NodePath("../Category Selection State")
 selectUnitState = NodePath("../Select Unit State")
 exploreState = NodePath("../Explore State")
 
-[node name="Category Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "actionSelectionState")]
+[node name="Category Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "actionSelectionState", "abilityTargetState")]
 script = ExtResource("10_6alih")
 commandSelectionState = NodePath("../Command Selection State")
 actionSelectionState = NodePath("../Action Selection State")
+abilityTargetState = NodePath("../Ability Target State")
 
 [node name="Explore State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState")]
 script = ExtResource("11_fj250")
 commandSelectionState = NodePath("../Command Selection State")
+
+[node name="Ability Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "categorySelectionState")]
+script = ExtResource("12_2punj")
+commandSelectionState = NodePath("../Command Selection State")
+categorySelectionState = NodePath("../Category Selection State")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_6a0kt")
@@ -434,9 +441,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 262.0
-offset_top = -17.0
+offset_top = 210.0
 offset_right = 295.0
-offset_bottom = 7.0
+offset_bottom = 234.0
 grow_vertical = 0
 texture = ExtResource("15_ey8f6")
 

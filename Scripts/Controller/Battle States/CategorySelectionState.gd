@@ -1,6 +1,7 @@
 extends BaseAbilityMenuState
 @export var commandSelectionState:State
 @export var actionSelectionState:State
+@export var abilityTargetState:State
 
 func Enter():
 	super()
@@ -32,10 +33,10 @@ func Cancel():
 	_owner.stateMachine.ChangeState(commandSelectionState)
 
 func Attack():
-	turn.hasUnitActed = true
-	if(turn.hasUnitMoved):
-		turn.lockMove = true
-	_owner.stateMachine.ChangeState(commandSelectionState)
+	var abilities:Array[Node] = turn.actor.get_node("Abilities").get_children()
+	turn.ability = abilities[0]
+	
+	_owner.stateMachine.ChangeState(abilityTargetState)
 
 func SetCategory(index:int):
 	actionSelectionState.category = index

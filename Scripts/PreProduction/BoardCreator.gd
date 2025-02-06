@@ -20,6 +20,16 @@ var _random = RandomNumberGenerator.new()
 var savePath = "res://Data/Levels/"
 @export var fileName = "defaultMap.txt"
 
+var _min = Vector2i(999999, 999999)
+var _max = Vector2i(-999999, -999999)
+
+var min:Vector2i:
+	get:
+		return _min 
+var max:Vector2i:
+	get:
+		return _max
+
 func _ready():
 	marker = tileSelectionIndicatorPrefab.instantiate()
 	add_child(marker)
@@ -38,6 +48,9 @@ func Clear():
 	for key in tiles:
 		tiles[key].free()
 	tiles.clear()
+	
+	_min = Vector2i(999999, 999999)
+	_max = Vector2i(-999999, -999999)
 
 func Grow():
 	_GrowSingle(pos)
@@ -105,7 +118,12 @@ func LoadMap(saveFile):
 		
 		var t: Tile = _Create()
 		t.Load(Vector2i(save_x, save_z) , save_height)
-		tiles[Vector2i(t.pos.x,t.pos.y)] = t	
+		tiles[Vector2i(t.pos.x,t.pos.y)] = t
+		
+		_min.x = min(_min.x, t.pos.x)
+		_min.y = min(_min.y, t.pos.y)
+		_max.x = max(_max.x, t.pos.x)
+		_max.y = max(_max.y, t.pos.y)	
 	
 	save_game.close()
 	_UpdateMarker()
@@ -152,6 +170,11 @@ func LoadMapJSON(saveFile):
 		var t: Tile = _Create()
 		t.Load(Vector2(mtile["pos_x"], mtile["pos_z"]) , mtile["height"])
 		tiles[Vector2i(t.pos.x,t.pos.y)] = t
+		
+		_min.x = min(_min.x, t.pos.x)
+		_min.y = min(_min.y, t.pos.y)
+		_max.x = max(_max.x, t.pos.x)
+		_max.y = max(_max.y, t.pos.y)
 	
 	save_game.close()
 	_UpdateMarker()
@@ -263,7 +286,8 @@ func RangeSearch(start: Tile, addTile: Callable, range: int):
 				continue
 
 			if next == start:
-				retValue.append(start)
+				if addTile.call(start, start):
+					retValue.append(start)
 			elif addTile.call(start, next):
 				next.distance = (abs(x) + abs(y))
 				next.prev = start

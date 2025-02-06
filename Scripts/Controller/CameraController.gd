@@ -53,13 +53,13 @@ func AdjustedMovement(originalPoint:Vector2i):
 	if ((angle >= -45 && angle < 45) || ( angle < -315 || angle >= 315)):
 		return originalPoint
 		
-	elif ((angle >= 45 && angle < 130) || ( angle >= -315 && angle < -210 )):
+	elif ((angle >= 45 && angle < 135) || ( angle >= -315 && angle < -225 )):
 		return Vector2i( originalPoint.y, originalPoint.x * -1)
 		
-	elif ((angle >= 130 && angle < 210) || ( angle >= -210 && angle < -130 )):
+	elif ((angle >= 135 && angle < 225) || ( angle >= -225 && angle < -135 )):
 		return Vector2i(originalPoint.x * -1, originalPoint.y * -1)
 
-	elif ((angle >= 210 && angle < 315) || ( angle >= -130 && angle < -45 )):
+	elif ((angle >= 225 && angle < 315) || ( angle >= -135 && angle < -45 )):
 		return Vector2i(originalPoint.y * -1, originalPoint.x)
 
 	else:
