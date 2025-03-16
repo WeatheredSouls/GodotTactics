@@ -4,6 +4,7 @@ extends BaseAbilityMenuState
 @export var categorySelectionState: State
 @export var selectUnitState: State
 @export var exploreState: State
+@export var endFacingState: State
 
 func Enter():
 	super()
@@ -32,7 +33,7 @@ func Confirm():
 		1:
 			_owner.stateMachine.ChangeState(categorySelectionState)
 		2:
-			_owner.stateMachine.ChangeState(selectUnitState)
+			_owner.stateMachine.ChangeState(endFacingState)
 
 func Cancel():
 	if(turn.hasUnitMoved && !turn.lockMove):

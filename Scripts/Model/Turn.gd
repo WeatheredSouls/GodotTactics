@@ -8,6 +8,7 @@ var lockMove:bool
 var startTile:Tile
 var startDir: Directions.Dirs
 var ability: Node
+var targets:Array[Tile]
 
 func Change(current:Unit):
 	actor = current

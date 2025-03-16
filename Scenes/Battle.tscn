@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=65 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -18,8 +18,11 @@
 [ext_resource type="Script" path="res://Scripts/Controller/Battle States/AbilityTargetState.gd" id="12_2punj"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/ConversationPanel.gd" id="12_3j4sj"]
 [ext_resource type="Script" path="res://Scripts/Common/UI/PanelAnchor.gd" id="13_4akxu"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/ConfirmAbilityTargetState.gd" id="13_acu00"]
 [ext_resource type="Texture2D" uid="uid://0tyk6cjeapi" path="res://Textures/UI/ConversationPanel.png" id="13_v33yy"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/PerformAbilityState.gd" id="14_32bbf"]
 [ext_resource type="Texture2D" uid="uid://biu741lehhl8s" path="res://Textures/UI/Avatar.png" id="14_ikhvj"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/EndFacingState.gd" id="15_b2fh0"]
 [ext_resource type="Texture2D" uid="uid://bqhgfy01bdleo" path="res://Textures/UI/MoreConversationArrow.png" id="15_ey8f6"]
 [ext_resource type="Script" path="res://Scripts/Controller/GameObjectPoolController.gd" id="17_qqbh6"]
 [ext_resource type="Script" path="res://Scripts/Controller/AbilityMenuPanelController.gd" id="18_mr0s1"]
@@ -330,12 +333,13 @@ script = ExtResource("8_4ahfi")
 commandSelectionState = NodePath("../Command Selection State")
 categorySelectionState = NodePath("../Category Selection State")
 
-[node name="Command Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState", "categorySelectionState", "selectUnitState", "exploreState")]
+[node name="Command Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState", "categorySelectionState", "selectUnitState", "exploreState", "endFacingState")]
 script = ExtResource("9_paokb")
 moveTargetState = NodePath("../Move Target State")
 categorySelectionState = NodePath("../Category Selection State")
 selectUnitState = NodePath("../Select Unit State")
 exploreState = NodePath("../Explore State")
+endFacingState = NodePath("../End Facing State")
 
 [node name="Category Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "actionSelectionState", "abilityTargetState")]
 script = ExtResource("10_6alih")
@@ -347,10 +351,25 @@ abilityTargetState = NodePath("../Ability Target State")
 script = ExtResource("11_fj250")
 commandSelectionState = NodePath("../Command Selection State")
 
-[node name="Ability Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "categorySelectionState")]
+[node name="Ability Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("categorySelectionState", "confirmAbilityTargetState")]
 script = ExtResource("12_2punj")
-commandSelectionState = NodePath("../Command Selection State")
 categorySelectionState = NodePath("../Category Selection State")
+confirmAbilityTargetState = NodePath("../Confirm Ability Target State")
+
+[node name="Confirm Ability Target State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("performAbilityState", "abilityTargetState")]
+script = ExtResource("13_acu00")
+performAbilityState = NodePath("../Perform Ability State")
+abilityTargetState = NodePath("../Ability Target State")
+
+[node name="Perform Ability State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("endFacingState", "commandSelectionState")]
+script = ExtResource("14_32bbf")
+endFacingState = NodePath("../End Facing State")
+commandSelectionState = NodePath("../Command Selection State")
+
+[node name="End Facing State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("selectUnitState", "commandSelectionState")]
+script = ExtResource("15_b2fh0")
+selectUnitState = NodePath("../Select Unit State")
+commandSelectionState = NodePath("../Command Selection State")
 
 [node name="Input Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("2_6a0kt")
