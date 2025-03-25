@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=66 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://dl1xtgj7d3d27" path="res://Textures/UI/BlueAttackPanel.png" id="26_sbods"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/StatPanel.gd" id="27_e2b2e"]
 [ext_resource type="Texture2D" uid="uid://devbmisnl337" path="res://Textures/UI/RedAttackPanel.png" id="29_rgavg"]
+[ext_resource type="Script" path="res://Scripts/Controller/TurnOrderController.gd" id="34_opnmc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvobm"]
 
@@ -293,7 +294,7 @@ outline_color = Color(0, 0, 0, 0.501961)
 
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "conversationController", "stateMachine", "startState", "abilityMenuPanelController", "statPanelController")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "conversationController", "stateMachine", "startState", "abilityMenuPanelController", "statPanelController", "turnOrderController")]
 script = ExtResource("1_jg3qk")
 board = NodePath("Board")
 inputController = NodePath("Input Controller")
@@ -303,6 +304,7 @@ stateMachine = NodePath("State Machine")
 startState = NodePath("State Machine/Init Battle State")
 abilityMenuPanelController = NodePath("Ability Menu Controller")
 statPanelController = NodePath("Stat Panel Controller")
+turnOrderController = NodePath("Turn Order Controller")
 
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_lgpnl")
@@ -460,9 +462,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 262.0
-offset_top = 210.0
+offset_top = -17.0
 offset_right = 295.0
-offset_bottom = 234.0
+offset_bottom = 7.0
 grow_vertical = 0
 texture = ExtResource("15_ey8f6")
 
@@ -824,5 +826,8 @@ text = "LV. 5"
 label_settings = SubResource("LabelSettings_aejep")
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="Turn Order Controller" type="Node" parent="Battle Controller"]
+script = ExtResource("34_opnmc")
 
 [node name="Test" type="Node" parent="."]

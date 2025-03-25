@@ -27,6 +27,10 @@ var statPanelController:StatPanelController:
 	get:
 		return _owner.statPanelController
 
+var turnController:TurnOrderController:
+	get:
+		return _owner.turnOrderController
+
 func _ready():
 	_owner = get_node("../../")
 

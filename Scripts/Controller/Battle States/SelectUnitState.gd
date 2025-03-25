@@ -1,13 +1,12 @@
 extends BattleState
 
 @export var commandSelectionState: State
-var index:int = -1
 
 func Enter():
 	super()
 	ChangeCurrentUnit()
-
+	
 func ChangeCurrentUnit():
-	index = (index + 1) % units.size()
-	turn.Change(units[index])
+	turnController.roundResume.emit()
+	SelectTile(turn.actor.tile.pos)	
 	_owner.stateMachine.ChangeState(commandSelectionState)
