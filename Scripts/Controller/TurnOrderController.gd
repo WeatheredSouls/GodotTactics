@@ -7,10 +7,11 @@ const moveCost:int = 300
 const actionCost:int = 200
 
 signal roundBeganNotification()
-signal turnCheckNotification(exc:BaseException)
+signal turnCheckNotification(sender:Unit, exc:BaseException)
 signal turnCompletedNotification(unit:Unit)
 signal roundEndedNotification()
 signal roundResume()
+var _turnBeganNotification = {}
 
 func _ready():
 	Round()
@@ -31,6 +32,7 @@ func Round():
 		for unit in units:
 			if(CanTakeTurn(unit)):
 				bc.turn.Change(unit)
+				TurnBeganNotification(unit).emit()
 				await roundResume
 				var cost:int = turnCost
 				if(bc.turn.hasUnitMoved):
@@ -45,9 +47,18 @@ func Round():
 				
 func CanTakeTurn(target:Unit):
 	var exc:BaseException = BaseException.new( GetCounter(target) >= turnActivation)
-	turnCheckNotification.emit(exc)
+	turnCheckNotification.emit(target, exc)
 	return exc.toggle
 	
 func GetCounter(target:Unit):
 	var s:Stats = target.get_node("Stats")
 	return s.GetStat(StatTypes.Stat.CTR)
+
+func TurnBeganNotification(unit:Unit):
+	var unitName = unit.name
+	
+	if(!_turnBeganNotification.has(unitName)):
+		self.add_user_signal(unitName+"_turnBegan")
+		_turnBeganNotification[unitName] = Signal(self, unitName+"_turnBegan")
+		
+	return _turnBeganNotification[unitName]

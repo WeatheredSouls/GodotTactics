@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b4hk8c5bhrmur"]
+[gd_scene load_steps=11 format=3 uid="uid://b4hk8c5bhrmur"]
 
 [ext_resource type="Material" uid="uid://ca2attav4014m" path="res://Materials/Ally.tres" id="1_1542g"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Unit.gd" id="1_jh304"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConeAbilityRange.gd" id="4_gbemv"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/FullAbilityArea.gd" id="5_rf8pb"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="6_meuw2"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Actor/Equipment.gd" id="7_atnug"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Status/Status.gd" id="7_w0yuf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v77ue"]
 
@@ -47,3 +49,9 @@ script = ExtResource("5_rf8pb")
 
 [node name="Ability Effect Target" type="Node" parent="Abilities/Attack"]
 script = ExtResource("6_meuw2")
+
+[node name="Equipment" type="Node" parent="."]
+script = ExtResource("7_atnug")
+
+[node name="Status" type="Node" parent="."]
+script = ExtResource("7_w0yuf")
