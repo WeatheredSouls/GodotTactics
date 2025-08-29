@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=76 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -35,6 +35,10 @@
 [ext_resource type="Texture2D" uid="uid://devbmisnl337" path="res://Textures/UI/RedAttackPanel.png" id="29_rgavg"]
 [ext_resource type="Script" path="res://Scripts/Controller/TurnOrderController.gd" id="34_opnmc"]
 [ext_resource type="Script" path="res://Scripts/Test/StatusEffectDemo.gd" id="35_hq8fa"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/HitSuccessIndicator.gd" id="35_joq03"]
+[ext_resource type="Script" path="res://Scripts/Common/UI/LayoutAnchor.gd" id="36_00mtv"]
+[ext_resource type="Texture2D" uid="uid://lm3oejxnfwbl" path="res://Textures/UI/AttackArrowBacker.png" id="37_trv01"]
+[ext_resource type="Texture2D" uid="uid://cqxxq4gd45hlu" path="res://Textures/UI/AttackArrowFill.png" id="38_bmghk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvobm"]
 
@@ -293,9 +297,43 @@ font_size = 20
 outline_size = 5
 outline_color = Color(0, 0, 0, 0.501961)
 
+[sub_resource type="Resource" id="Resource_cbnv3"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide"
+myAnchor = 5
+parentAnchor = 7
+offset = Vector2(0, 15)
+duration = 0.5
+trans = 4
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_wxptb"]
+script = ExtResource("13_4akxu")
+anchorName = "Show"
+myAnchor = 7
+parentAnchor = 7
+offset = Vector2(0, -130)
+duration = 0.5
+trans = 4
+anchorEase = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lw7y6"]
+
+[sub_resource type="SystemFont" id="SystemFont_8hwfn"]
+font_names = PackedStringArray("Arial")
+font_italic = true
+font_weight = 575
+
+[sub_resource type="LabelSettings" id="LabelSettings_gaw88"]
+font = SubResource("SystemFont_8hwfn")
+font_size = 30
+font_color = Color(0.568627, 0.133333, 0.160784, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 0.501961)
+
 [node name="Battle" type="Node3D"]
 
-[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "conversationController", "stateMachine", "startState", "abilityMenuPanelController", "statPanelController", "turnOrderController")]
+[node name="Battle Controller" type="Node" parent="." node_paths=PackedStringArray("board", "inputController", "cameraController", "conversationController", "stateMachine", "startState", "abilityMenuPanelController", "statPanelController", "turnOrderController", "hitSuccessIndicator")]
 script = ExtResource("1_jg3qk")
 board = NodePath("Board")
 inputController = NodePath("Input Controller")
@@ -306,6 +344,7 @@ startState = NodePath("State Machine/Init Battle State")
 abilityMenuPanelController = NodePath("Ability Menu Controller")
 statPanelController = NodePath("Stat Panel Controller")
 turnOrderController = NodePath("Turn Order Controller")
+hitSuccessIndicator = NodePath("Hit Success Indicator")
 
 [node name="State Machine" type="Node" parent="Battle Controller"]
 script = ExtResource("2_lgpnl")
@@ -463,9 +502,9 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 262.0
-offset_top = -17.0
+offset_top = 210.0
 offset_right = 295.0
-offset_bottom = 7.0
+offset_bottom = 234.0
 grow_vertical = 0
 texture = ExtResource("15_ey8f6")
 
@@ -830,6 +869,58 @@ vertical_alignment = 1
 
 [node name="Turn Order Controller" type="Node" parent="Battle Controller"]
 script = ExtResource("34_opnmc")
+
+[node name="Hit Success Indicator" type="Node" parent="Battle Controller" node_paths=PackedStringArray("panel", "arrow", "label")]
+script = ExtResource("35_joq03")
+anchorList = Array[ExtResource("13_4akxu")]([SubResource("Resource_cbnv3"), SubResource("Resource_wxptb")])
+panel = NodePath("Hit Panel")
+arrow = NodePath("Hit Panel/Hit ProgressBar")
+label = NodePath("Hit Panel/Hit Label")
+
+[node name="Hit Panel" type="Panel" parent="Battle Controller/Hit Success Indicator"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -247.0
+offset_right = 96.0
+offset_bottom = -140.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lw7y6")
+script = ExtResource("36_00mtv")
+
+[node name="Hit ProgressBar" type="TextureProgressBar" parent="Battle Controller/Hit Success Indicator/Hit Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -117.0
+offset_right = 192.0
+offset_bottom = -36.0
+grow_vertical = 0
+texture_under = ExtResource("37_trv01")
+texture_progress = ExtResource("38_bmghk")
+texture_progress_offset = Vector2(14, 3)
+
+[node name="Hit Label" type="Label" parent="Battle Controller/Hit Success Indicator/Hit Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -49.0
+offset_right = 84.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "77% 7pt(s)"
+label_settings = SubResource("LabelSettings_gaw88")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Test" type="Node" parent="."]
 script = ExtResource("35_hq8fa")

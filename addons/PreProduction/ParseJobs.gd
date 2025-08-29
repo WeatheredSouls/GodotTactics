@@ -24,19 +24,26 @@ func ParseStartingStats(data):
 		if item == 0:
 			continue
 		var elements : Array = data[item]
-
 		var scene:PackedScene = GetOrCreate(elements[0])
 		var job = scene.instantiate()
 
 		for i in job.statOrder.size():
 			job.baseStats[i] = int(elements[i+1])
 		
+		var evade:StatModifierFeature = GetFeature(job, StatTypes.Stat.EVD)
+		evade.amount = int(elements[8])
+		evade.name = "SMF_EVD"
+		
+		var res:StatModifierFeature = GetFeature(job, StatTypes.Stat.RES)
+		res.amount = int(elements[9])
+		res.name = "SMF_RES"
+		
 		var move:StatModifierFeature = GetFeature(job, StatTypes.Stat.MOV)
-		move.amount = int(elements[8])
+		move.amount = int(elements[10])
 		move.name = "SMF_MOV"
 		
 		var jump:StatModifierFeature = GetFeature(job, StatTypes.Stat.JMP)
-		jump.amount = int(elements[9])
+		jump.amount = int(elements[11])
 		jump.name = "SMF_JMP"
 		
 		scene.pack(job)

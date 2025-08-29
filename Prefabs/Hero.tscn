@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4hk8c5bhrmur"]
+[gd_scene load_steps=12 format=3 uid="uid://b4hk8c5bhrmur"]
 
 [ext_resource type="Material" uid="uid://ca2attav4014m" path="res://Materials/Ally.tres" id="1_1542g"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Unit.gd" id="1_jh304"]
 [ext_resource type="Material" uid="uid://ci5if3vpfmyrc" path="res://Materials/Eyes.tres" id="2_bcdkh"]
-[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConeAbilityRange.gd" id="4_gbemv"]
-[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/FullAbilityArea.gd" id="5_rf8pb"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="4_uwad1"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/UnitAbilityArea.gd" id="5_8wht0"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="6_meuw2"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Actor/Equipment.gd" id="7_atnug"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="7_jifwt"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Status/Status.gd" id="7_w0yuf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v77ue"]
@@ -40,15 +41,17 @@ mesh = SubResource("SphereMesh_w1ol6")
 [node name="Attack" type="Node" parent="Abilities"]
 
 [node name="Ability Range" type="Node" parent="Abilities/Attack"]
-script = ExtResource("4_gbemv")
-horizontal = 4
+script = ExtResource("4_uwad1")
 minH = 1
 
 [node name="Ability Area" type="Node" parent="Abilities/Attack"]
-script = ExtResource("5_rf8pb")
+script = ExtResource("5_8wht0")
 
 [node name="Ability Effect Target" type="Node" parent="Abilities/Attack"]
 script = ExtResource("6_meuw2")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Attack"]
+script = ExtResource("7_jifwt")
 
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource("7_atnug")

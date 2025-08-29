@@ -13,6 +13,7 @@ class_name BattleController
 @export var statPanelController:StatPanelController
 
 @export var turnOrderController:TurnOrderController
+@export var hitSuccessIndicator:HitSuccessIndicator
 
 var turn:Turn = Turn.new()
 var units:Array[Unit] = []

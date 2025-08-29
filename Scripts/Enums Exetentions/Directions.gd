@@ -7,6 +7,12 @@ NORTH,
 WEST 
 }
 
+enum Facings{
+FRONT,
+SIDE,
+BACK
+}
+
 static func GetDirection(t1: Tile, t2: Tile):
 	var dir:Directions.Dirs
 	var toTile:Vector2i = t1.pos - t2.pos
@@ -33,3 +39,17 @@ static func ToDir(p: Vector2i):
 	if(p.y > 0):
 		return Dirs.SOUTH
 	return Dirs.EAST
+
+static func GetFacing(attacker:Unit, target:Unit):
+	var targetDirection:Vector2 = ToVector(target.dir)
+	var attackerDirection:Vector2 = (Vector2)(attacker.tile.pos - target.tile.pos).normalized()
+	
+	const frontThreshold:float = 0.45
+	const backThreshold:float = -0.45
+	
+	var dot:float = targetDirection.dot(attackerDirection)
+	if dot >= frontThreshold:
+		return Facings.FRONT
+	if dot <= backThreshold:
+		return Facings.BACK
+	return Facings.SIDE

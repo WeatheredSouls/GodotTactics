@@ -18,9 +18,11 @@ func OnTurnCheck(target:Unit, exc:BaseException):
 		1:
 			Add(target, "Slow", SlowStatusEffect, 15 )
 		2:
-			Add(target, "Stop", StopStatusEffect, 15 )
+			Add(target, "Stop", StopStatusEffect, 150 )
 		3:
-			Add(target, "Haste", HasteStatusEffect, 15 )
+			Add(target, "Haste", HasteStatusEffect, 15)
+		4:
+			Add(target, "Blind", BlindStatusEffect, 500)
 		_:
 			UnEquipCursedItem(target)
 		

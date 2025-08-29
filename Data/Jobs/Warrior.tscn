@@ -17,3 +17,13 @@ amount = 4
 script = ExtResource("2_2hmsu")
 type = 14
 amount = 1
+
+[node name="SMF_EVD" type="Node" parent="."]
+script = ExtResource("2_2hmsu")
+type = 10
+amount = 50
+
+[node name="SMF_RES" type="Node" parent="."]
+script = ExtResource("2_2hmsu")
+type = 11
+amount = 50
