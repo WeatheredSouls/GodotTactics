@@ -25,3 +25,11 @@ var currentTile:Tile:
 
 func _ready():
 	stateMachine.ChangeState(startState)
+
+func GetParentUnit(node:Node):
+	var parent = node.get_parent()
+	if parent == null:
+		return null
+	if parent is Unit:
+		return parent
+	return GetParentUnit(parent)

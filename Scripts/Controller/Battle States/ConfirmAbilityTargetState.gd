@@ -40,18 +40,17 @@ func OnFire(e:int):
 		_owner.stateMachine.ChangeState(abilityTargetState)
 
 func FindTargets():
-	turn.targets = []	
-	var children:Array[Node] = turn.ability.get_children()
-	var targeters:Array[AbilityEffectTarget]
-	targeters.assign(children.filter(func(node): return node is AbilityEffectTarget))
+	turn.targets = []
 	
 	for tile in tiles:
-		if(IsTarget(tile, targeters)):
+		if(IsTarget(tile)):
 			turn.targets.append(tile)
 
-func IsTarget(tile:Tile, list:Array[AbilityEffectTarget]):
-	for item in list:
-		if(item.IsTarget(tile)):
+func IsTarget(tile:Tile):
+	var children:Array[Node] = turn.ability.find_children("*", "BaseAbilityEffect", false)
+	for child in children:
+		var targeter:AbilityEffectTarget = child.get_node("Ability Effect Target")
+		if targeter.IsTarget(tile):
 			return true
 	return false
 
@@ -72,18 +71,17 @@ func Orbit(direction: Vector2):
 	_owner.cameraController.Orbit(direction)
 
 func UpdateHitSuccessIndicator():
-	var chance:int = CalculateHitRate()
-	var amount:int = EstimateDamage()
-	hitSuccessIndicator.SetStats(chance, amount)
-
-func CalculateHitRate():
-	var target = turn.targets[index].content
-	var children:Array[Node] = turn.ability.find_children("*", "HitRate", false)
-	if children:
-		var hr:HitRate = children[0]
-		return hr.Calculate(turn.actor, target)
-	print("Couldn't find Hit Rate")
-	return 0
+	var chance:int = 0
+	var amount:int = 0
+	var target:Tile = turn.targets[index]
 	
-func EstimateDamage()->int:
-	return 50
+	var children:Array[Node] = turn.ability.find_children("*", "BaseAbilityEffect", false)
+	for child in children:
+		var targeter:AbilityEffectTarget = child.get_node("Ability Effect Target")
+		if targeter.IsTarget(target):
+			var hitRate:HitRate = child.get_node("Hit Rate")
+			chance = hitRate.Calculate(target)
+			amount = child.Predict(target)
+			break
+	
+	hitSuccessIndicator.SetStats(chance, amount)

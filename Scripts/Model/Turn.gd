@@ -7,7 +7,7 @@ var hasUnitActed:bool
 var lockMove:bool
 var startTile:Tile
 var startDir: Directions.Dirs
-var ability: Node
+var ability: Ability
 var targets:Array[Tile]
 
 func Change(current:Unit):

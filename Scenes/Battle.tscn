@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://db0rltrumescg"]
+[gd_scene load_steps=75 format=3 uid="uid://db0rltrumescg"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
 [ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
@@ -34,7 +34,6 @@
 [ext_resource type="Script" path="res://Scripts/View Model Component/StatPanel.gd" id="27_e2b2e"]
 [ext_resource type="Texture2D" uid="uid://devbmisnl337" path="res://Textures/UI/RedAttackPanel.png" id="29_rgavg"]
 [ext_resource type="Script" path="res://Scripts/Controller/TurnOrderController.gd" id="34_opnmc"]
-[ext_resource type="Script" path="res://Scripts/Test/StatusEffectDemo.gd" id="35_hq8fa"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/HitSuccessIndicator.gd" id="35_joq03"]
 [ext_resource type="Script" path="res://Scripts/Common/UI/LayoutAnchor.gd" id="36_00mtv"]
 [ext_resource type="Texture2D" uid="uid://lm3oejxnfwbl" path="res://Textures/UI/AttackArrowBacker.png" id="37_trv01"]
@@ -923,4 +922,3 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Test" type="Node" parent="."]
-script = ExtResource("35_hq8fa")

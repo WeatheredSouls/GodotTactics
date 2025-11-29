@@ -5,6 +5,9 @@ signal AutomaticHitCheckNotification
 signal AutomaticMissCheckNotification
 signal StatusCheckNotification
 
+signal MissedNotification
+signal HitNotification
+
 @export var anchorList:Array[PanelAnchor] = []
 @export var panel:LayoutAnchor
 @export var arrow:TextureProgressBar

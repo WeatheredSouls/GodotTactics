@@ -1,16 +1,17 @@
 extends HitRate
 class_name ATypeHitRate
 
-func Calculate(attacker:Unit, target:Unit):
-	if(AutomaticHit(attacker, target)):
+func Calculate(target:Tile):
+	var defender = target.content
+	if(AutomaticHit(defender)):
 		return Final(0)
 	
-	if(AutomaticMiss(attacker, target)):
+	if(AutomaticMiss(defender)):
 		return Final(100)
 		
-	var evade:int = GetEvade(target)
-	evade = AdjustForRelativeFacing(attacker, target, evade)
-	evade = AdjustForStatusEffects(attacker, target, evade)
+	var evade:int = GetEvade(defender)
+	evade = AdjustForRelativeFacing(defender, evade)
+	evade = AdjustForStatusEffects(defender, evade)
 	evade = clamp(evade, 5, 95)
 	return Final(evade)
 
@@ -18,7 +19,7 @@ func GetEvade(target:Unit):
 	var s:Stats = target.get_node("Stats")
 	return clamp(s.GetStat(StatTypes.Stat.EVD), 0, 100)
 
-func AdjustForRelativeFacing(attacker:Unit, target:Unit, rate:int):
+func AdjustForRelativeFacing(target:Unit, rate:int):
 	match Directions.GetFacing(attacker, target):
 		Directions.Facings.FRONT:
 			return rate

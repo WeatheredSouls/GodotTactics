@@ -6,6 +6,15 @@ const HideKey:String = "Hide"
 const EntryPoolKey:String = "AbilityMenuPanel.Entry"
 const MenuCount:int = 4
 
+signal GetAttackNotification(info:Info)
+signal GetDefenseNotification(info:Info)
+signal GetPowerNotification(info:Info)
+signal TweakDamageNotification(info:Info)
+
+signal CanPerformCheck(exc:BaseException)
+signal FailedNotification()
+signal DidPerformNotification()
+
 @export var entryPrefab:PackedScene
 @export var titleLabel:Label
 @export var panel:AbilityMenuPanel

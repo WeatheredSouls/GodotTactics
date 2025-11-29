@@ -29,3 +29,10 @@ func UnEquipSlots(slots:EquipSlots.Slot):
 		var item = _items[i]
 		if (item.slots & slots) != EquipSlots.Slot.NONE:
 			UnEquipItem(item)
+
+func GetItem(slots:EquipSlots.Slot):
+	for i in range(_items.size()-1,-1,-1):
+		var item = _items[i]
+		if (item.slots & slots) != EquipSlots.Slot.NONE:
+			return item
+	return null
