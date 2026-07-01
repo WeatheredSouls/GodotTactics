@@ -7,6 +7,8 @@ var tiles
 var aa:AbilityArea
 var index:int = 0
 
+var unitTargetList:Array[Tile] = []
+
 func Enter():
 	super()
 	var filtered = turn.ability.get_children().filter(func(node): return node is AbilityArea)
@@ -21,6 +23,7 @@ func Enter():
 
 func Exit():
 	super()
+	unitTargetList.clear()
 	board.DeSelectTiles(tiles)
 	await statPanelController.HidePrimary()
 	await statPanelController.HideSecondary()
@@ -45,6 +48,13 @@ func FindTargets():
 	for tile in tiles:
 		if(IsTarget(tile)):
 			turn.targets.append(tile)
+	
+	if turn.targets.size() > 0:
+		for target in turn.targets:
+			if target.content != null:
+				unitTargetList.append(target)
+		if unitTargetList.size() == 0:
+			unitTargetList.append(turn.targets[0])
 
 func IsTarget(tile:Tile):
 	var children:Array[Node] = turn.ability.find_children("*", "BaseAbilityEffect", false)
@@ -57,11 +67,11 @@ func IsTarget(tile:Tile):
 func SetTarget(target:int):
 	index = target
 	if index < 0:
-		index = turn.targets.size()
-	if index >= turn.targets.size():
+		index = unitTargetList.size()-1
+	if index >= unitTargetList.size():
 		index = 0
-	if turn.targets.size() > 0:
-		RefreshSecondaryStatPanel(turn.targets[index].pos)
+	if unitTargetList.size() > 0:
+		RefreshSecondaryStatPanel(unitTargetList[index].pos)
 		UpdateHitSuccessIndicator()
 
 func Zoom(scroll: int):

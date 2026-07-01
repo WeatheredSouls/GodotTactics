@@ -16,24 +16,24 @@ func _exit_tree():
 	abilityController.GetDefenseNotification.disconnect(OnGetBaseDefense)
 	abilityController.GetPowerNotification.disconnect(OnGetPower)
 
-func OnGetBaseAttack(info:Info):
-	if info.attacker != battle.GetParentUnit(self):
+func OnGetBaseAttack(sender:Node, info:Info):
+	if sender.get_parent() != self.get_parent():
 		return
-		
+	
 	var mod:AddValueModifier = AddValueModifier.new(0, GetBaseAttack())
 	info.data.append(mod)
 
-func OnGetBaseDefense(info:Info):
-	if info.attacker != battle.GetParentUnit(self):
+func OnGetBaseDefense(sender:Node, info:Info):
+	if sender.get_parent() != self.get_parent():
 		return
 		
 	var mod:AddValueModifier = AddValueModifier.new(0, GetBaseDefense(info.target))
 	info.data.append(mod)
 
-func OnGetPower(info:Info):
-	if info.attacker != battle.GetParentUnit(self):
+func OnGetPower(sender:Node, info:Info):
+	if sender.get_parent() != self.get_parent():
 		return
-		
+	
 	var mod:AddValueModifier = AddValueModifier.new(0, GetPower())
 	info.data.append(mod)
 

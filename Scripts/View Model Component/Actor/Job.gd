@@ -35,7 +35,7 @@ func Employ():
 		node.Activate(self.get_parent())
 	
 func UnEmploy():
-	var features:Array[Node] = self.get_parent().get_children()
+	var features:Array[Node] = self.get_children()
 	
 	var filteredArray = features.filter(func(node):return node is Feature)
 	for node in filteredArray:

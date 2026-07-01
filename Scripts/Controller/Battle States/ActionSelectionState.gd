@@ -1,10 +1,9 @@
 extends BaseAbilityMenuState
-@export var commandSelectionState:State
+@export var abilityTargetState:State
 @export var categorySelectionState:State
 
 static var category:int
-var whiteMagicOptions:Array[String] = ["Cure", "Raise"]
-var blackMagicOptions:Array[String] = ["Fire", "Ice", "Lightning", "Poison"]
+var catalog:AbilityCatalog
 
 func Enter():
 	super()
@@ -15,24 +14,32 @@ func Exit():
 	await statPanelController.HidePrimary()
 
 func LoadMenu():
-	if(category == 0):
-		menuTitle = "White Magic"
-		SetOptions(whiteMagicOptions)
-	else:
-		menuTitle = "BlackMagic"
-		SetOptions(blackMagicOptions)
+	catalog = turn.actor.get_node("Abilities/Ability Catalog")	
+	var container:Node = catalog.GetCategory(category)
+	menuTitle = container.name
+	
+	var count:int = catalog.AbilityCount(container)
+	menuOptions.clear()
+	
+	var locks:Array[bool]
+	locks.resize(count)
+	
+	for i in count:
+		var ability:Ability = catalog.GetAbility(category, i)
+		var cost:AbilityMagicCost = ability.get_node_or_null("Ability Magic Cost")
+		if cost:
+			menuOptions.append("{0}: {1}".format([ability.name, cost.amount]))
+		else:
+			menuOptions.append(ability.name)
+		locks[i] = !ability.CanPerform()
+	
 	abilityMenuPanelController.Show(menuTitle,menuOptions)
+	for i in count:
+		abilityMenuPanelController.SetLocked(i, locks[i])
 
 func Confirm():
-	turn.hasUnitActed = true
-	if(turn.hasUnitMoved):
-		turn.lockMove = true
-	_owner.stateMachine.ChangeState(commandSelectionState)
+	turn.ability = catalog.GetAbility(category, abilityMenuPanelController.selection)
+	_owner.stateMachine.ChangeState(abilityTargetState)
 
 func Cancel():
 	_owner.stateMachine.ChangeState(categorySelectionState)
-
-func SetOptions(options:Array[String]):
-	menuOptions.clear()
-	for entry in options:
-		menuOptions.append(entry)

@@ -54,8 +54,17 @@ func SpawnTestUnits():
 		m.jumpHeight = 1
 		m.set_process(true)
 		
-		units.append(unit)
+		var health:Health = Health.new()
+		health.name = "Health"
+		unit.add_child(health)
 
-#		var rank = Rank.new()
-#		unit.add_child(rank)
-#		rank.Init(10)
+		var mana:Mana = Mana.new()
+		mana.name = "Mana"
+		unit.add_child(mana)
+		
+		var rank = Rank.new()
+		rank.name = "Rank"
+		unit.add_child(rank)
+		rank.Init(10)
+		
+		units.append(unit)

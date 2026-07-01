@@ -13,14 +13,14 @@ func GetTilesInArea(board:BoardCreator, pos:Vector2i):
 	var retValue:Array[Tile] = []
 	
 	targetTile = board.GetTile(pos)
-	unitTile = self.get_node("../../../").tile
+	unitTile = board.get_parent().GetParentUnit(self).tile
 	
 	var numberSteps = LongestSide(unitTile.pos, targetTile.pos)
 	var maxSteps = rangeH if useAbilityRange else horizontal
 	var minSteps = rangeMinH if useAbilityRange else minH
 	
 	for i in range(minSteps,maxSteps+1):
-		if !extendPastTarget && i > numberSteps + 1:
+		if !extendPastTarget && i > numberSteps:
 			break
 		var lerpAmount:float = 0 if numberSteps==0 else float(i)/numberSteps
 		var point:Vector2 = lerp(Vector2(unitTile.pos),Vector2(targetTile.pos),lerpAmount)

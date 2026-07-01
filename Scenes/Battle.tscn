@@ -369,9 +369,9 @@ commandSelectionState = NodePath("../Command Selection State")
 script = ExtResource("7_hiiig")
 selectUnitState = NodePath("../Select Unit State")
 
-[node name="Action Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("commandSelectionState", "categorySelectionState")]
+[node name="Action Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("abilityTargetState", "categorySelectionState")]
 script = ExtResource("8_4ahfi")
-commandSelectionState = NodePath("../Command Selection State")
+abilityTargetState = NodePath("../Ability Target State")
 categorySelectionState = NodePath("../Category Selection State")
 
 [node name="Command Selection State" type="Node" parent="Battle Controller/State Machine" node_paths=PackedStringArray("moveTargetState", "categorySelectionState", "selectUnitState", "exploreState", "endFacingState")]

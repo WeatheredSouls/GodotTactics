@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b4hk8c5bhrmur"]
+[gd_scene load_steps=32 format=3 uid="uid://b4hk8c5bhrmur"]
 
 [ext_resource type="Material" uid="uid://ca2attav4014m" path="res://Materials/Ally.tres" id="1_1542g"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Unit.gd" id="1_jh304"]
@@ -8,13 +8,27 @@
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/UnitAbilityArea.gd" id="5_8wht0"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/PhysicalAbilityPower.gd" id="6_lxc6v"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="6_meuw2"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="6_tc7c3"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Actor/Equipment.gd" id="7_atnug"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="7_jifwt"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Status/Status.gd" id="7_w0yuf"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="7_yilf6"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/InflictAbilityEffect.gd" id="10_ernll"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityCatalog.gd" id="11_j3pbk"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Status/Effects/BlindStatusEffect.gd" id="11_vjfbv"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="12_s8end"]
 [ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/STypeHitRate.gd" id="12_tmfdy"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="13_w3hj5"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/HealAbilityEffect.gd" id="14_p5fuc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="15_5xqjp"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/UndeadAbilityEffectTarget.gd" id="16_iuirf"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/ReviveAbilityEffect.gd" id="17_upju5"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/KOdAbilityEffectTarget.gd" id="18_bn4e4"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/AbsorbDamageAbilityEffect.gd" id="23_crkwb"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/KnockbackAbilityEffect.gd" id="24_kviu0"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/LineAbilityArea.gd" id="25_6k4yr"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/EarthquakeAbilityEffect.gd" id="26_0vl5q"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/TileAbilityEffectTarget.gd" id="27_0ro3v"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_v77ue"]
 
@@ -52,7 +66,9 @@ script = ExtResource("4_uwad1")
 minH = 1
 
 [node name="Ability Area" type="Node" parent="Abilities/Attack"]
-script = ExtResource("5_8wht0")
+script = ExtResource("6_tc7c3")
+horizontal = 0
+vertical = 5
 
 [node name="Physical Ability Power" type="Node" parent="Abilities/Attack"]
 script = ExtResource("6_lxc6v")
@@ -61,23 +77,280 @@ level = 45
 [node name="Damage" type="Node" parent="Abilities/Attack"]
 script = ExtResource("7_yilf6")
 
-[node name="Ability Effect Target" type="Node" parent="Abilities/Attack/Damage"]
-script = ExtResource("6_meuw2")
-
 [node name="Hit Rate" type="Node" parent="Abilities/Attack/Damage"]
 script = ExtResource("7_jifwt")
 
-[node name="Inflict Blind" type="Node" parent="Abilities/Attack"]
+[node name="Ability Effect Target" type="Node" parent="Abilities/Attack/Damage"]
+script = ExtResource("6_meuw2")
+
+[node name="Ability Catalog" type="Node" parent="Abilities"]
+script = ExtResource("11_j3pbk")
+
+[node name="White Magic" type="Node" parent="Abilities/Ability Catalog"]
+
+[node name="Cure" type="Node" parent="Abilities/Ability Catalog/White Magic"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("4_uwad1")
+horizontal = 4
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("6_tc7c3")
+horizontal = 1
+vertical = 1
+
+[node name="Magical Ability Power" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("12_s8end")
+level = 40
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("13_w3hj5")
+amount = 6
+
+[node name="Heal" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("14_p5fuc")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure/Heal"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure/Heal"]
+script = ExtResource("16_iuirf")
+
+[node name="Damage" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure"]
+script = ExtResource("7_yilf6")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure/Damage"]
+script = ExtResource("7_jifwt")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Cure/Damage"]
+script = ExtResource("16_iuirf")
+toggle = true
+
+[node name="Raise" type="Node" parent="Abilities/Ability Catalog/White Magic"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("4_uwad1")
+horizontal = 4
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("6_tc7c3")
+horizontal = 1
+vertical = 2
+
+[node name="Magical Ability Power" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("12_s8end")
+level = 45
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("13_w3hj5")
+amount = 22
+
+[node name="Heal" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("14_p5fuc")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Heal"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Heal"]
+script = ExtResource("16_iuirf")
+
+[node name="Damage" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("7_yilf6")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Damage"]
+script = ExtResource("7_jifwt")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Damage"]
+script = ExtResource("16_iuirf")
+toggle = true
+
+[node name="Revive" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise"]
+script = ExtResource("17_upju5")
+percent = 0.25
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Revive"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Raise/Revive"]
+script = ExtResource("18_bn4e4")
+
+[node name="Holy" type="Node" parent="Abilities/Ability Catalog/White Magic"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy"]
+script = ExtResource("4_uwad1")
+horizontal = 3
+minH = 1
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy"]
+script = ExtResource("6_tc7c3")
+horizontal = 1
+vertical = 1
+
+[node name="Magical Ability Power" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy"]
+script = ExtResource("12_s8end")
+level = 50
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy"]
+script = ExtResource("13_w3hj5")
+amount = 32
+
+[node name="Damage" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy"]
+script = ExtResource("7_yilf6")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy/Damage"]
+script = ExtResource("7_jifwt")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/White Magic/Holy/Damage"]
+script = ExtResource("6_meuw2")
+
+[node name="Sagacity Skill" type="Node" parent="Abilities/Ability Catalog"]
+
+[node name="Water" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water"]
+script = ExtResource("4_uwad1")
+horizontal = 3
+minH = 1
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water"]
+script = ExtResource("6_tc7c3")
+horizontal = 1
+vertical = 2
+
+[node name="Magical Ability Power" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water"]
+script = ExtResource("12_s8end")
+level = 35
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water"]
+script = ExtResource("13_w3hj5")
+amount = 12
+
+[node name="Damage" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water"]
+script = ExtResource("7_yilf6")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water/Damage"]
+script = ExtResource("7_jifwt")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Water/Damage"]
+script = ExtResource("6_meuw2")
+
+[node name="Blind" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind"]
+script = ExtResource("4_uwad1")
+horizontal = 4
+minH = 1
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind"]
+script = ExtResource("5_8wht0")
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind"]
+script = ExtResource("13_w3hj5")
+amount = 12
+
+[node name="Inflict Blind" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind"]
 script = ExtResource("10_ernll")
 status_effect = ExtResource("11_vjfbv")
 effect_name = "Blind"
-duration = 50
+duration = 10
 
-[node name="Ability Effect Target" type="Node" parent="Abilities/Attack/Inflict Blind"]
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind/Inflict Blind"]
+script = ExtResource("12_tmfdy")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Blind/Inflict Blind"]
 script = ExtResource("6_meuw2")
 
-[node name="Hit Rate" type="Node" parent="Abilities/Attack/Inflict Blind"]
-script = ExtResource("12_tmfdy")
+[node name="Drain" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain"]
+script = ExtResource("4_uwad1")
+horizontal = 4
+minH = 1
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain"]
+script = ExtResource("5_8wht0")
+
+[node name="Magical Ability Power" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain"]
+script = ExtResource("12_s8end")
+level = 30
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain"]
+script = ExtResource("13_w3hj5")
+amount = 12
+
+[node name="Damage" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain"]
+script = ExtResource("7_yilf6")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain/Damage"]
+script = ExtResource("7_jifwt")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain/Damage"]
+script = ExtResource("6_meuw2")
+
+[node name="Absorb" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain" node_paths=PackedStringArray("effect")]
+script = ExtResource("23_crkwb")
+effect = NodePath("../Damage")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain/Absorb"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Sagacity Skill/Drain/Absorb"]
+script = ExtResource("6_meuw2")
+
+[node name="Bonus Skills" type="Node" parent="Abilities/Ability Catalog"]
+
+[node name="Shove" type="Node" parent="Abilities/Ability Catalog/Bonus Skills"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Shove"]
+script = ExtResource("4_uwad1")
+minH = 1
+vertical = 2
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Shove"]
+script = ExtResource("5_8wht0")
+
+[node name="Knockback" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Shove"]
+script = ExtResource("24_kviu0")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Shove/Knockback"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Shove/Knockback"]
+script = ExtResource("6_meuw2")
+
+[node name="Earthquake" type="Node" parent="Abilities/Ability Catalog/Bonus Skills"]
+script = ExtResource("4_0lxxe")
+
+[node name="Ability Range" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake"]
+script = ExtResource("4_uwad1")
+horizontal = 5
+minH = 1
+
+[node name="Ability Area" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake"]
+script = ExtResource("25_6k4yr")
+horizontal = 5
+vertical = 5
+extendPastTarget = true
+
+[node name="Ability Magic Cost" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake"]
+script = ExtResource("13_w3hj5")
+amount = 7
+
+[node name="Deform Terrain" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake"]
+script = ExtResource("26_0vl5q")
+
+[node name="Hit Rate" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake/Deform Terrain"]
+script = ExtResource("15_5xqjp")
+
+[node name="Ability Effect Target" type="Node" parent="Abilities/Ability Catalog/Bonus Skills/Earthquake/Deform Terrain"]
+script = ExtResource("27_0ro3v")
 
 [node name="Equipment" type="Node" parent="."]
 script = ExtResource("7_atnug")

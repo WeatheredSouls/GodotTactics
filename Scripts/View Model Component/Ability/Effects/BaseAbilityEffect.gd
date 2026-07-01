@@ -32,7 +32,7 @@ func OnApply(target:Tile):
 func GetStat(attacker:Unit, target:Unit, notifier:Signal, startValue:int):
 	var mods:Array[ValueModifier]
 	var info = Info.new(attacker, target, mods)
-	notifier.emit(info)
+	notifier.emit(self, info)
 	
 	mods.sort_custom(func(a, b): return a.sortOrder < b.sortOrder)
 	

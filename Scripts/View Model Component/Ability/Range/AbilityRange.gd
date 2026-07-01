@@ -11,7 +11,10 @@ func _get_directionOriented():
 
 var unit:Unit:
 	get:
-		return get_node("../../../")
+		var battle:BattleController
+		battle = get_tree().root.get_node("Battle/Battle Controller")
+		
+		return battle.GetParentUnit(self)
 
 func GetTilesInRange(board:BoardCreator):
 	pass
