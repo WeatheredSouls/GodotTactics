@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitRecipe" load_steps=2 format=3 uid="uid://y2s0qqy0khet"]
+
+[ext_resource type="Script" path="res://Scripts/Factory/UnitRecipe.gd" id="1_jloki"]
+
+[resource]
+script = ExtResource("1_jloki")
+model = "Monster"
+job = "Warrior"
+attack = "Common/Attack"
+abilityCatalog = "DemoCatalog"
+locomotion = 0
+alliance = 4

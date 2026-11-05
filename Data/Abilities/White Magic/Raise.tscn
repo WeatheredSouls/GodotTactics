@@ -1,0 +1,63 @@
+[gd_scene load_steps=13 format=3 uid="uid://q1bmor4byav4"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_ycvoc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_ffc1m"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="3_b8esa"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="4_qptl5"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="5_gnyye"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/HealAbilityEffect.gd" id="6_44st6"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="7_3d1p6"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/UndeadAbilityEffectTarget.gd" id="8_ykesu"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="9_mcka3"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="10_2qfqn"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/ReviveAbilityEffect.gd" id="11_v1k8i"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/KOdAbilityEffectTarget.gd" id="12_d44gt"]
+
+[node name="Raise" type="Node"]
+script = ExtResource("1_ycvoc")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_ffc1m")
+horizontal = 4
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_b8esa")
+horizontal = 1
+vertical = 2
+
+[node name="Magical Ability Power" type="Node" parent="."]
+script = ExtResource("4_qptl5")
+level = 45
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("5_gnyye")
+amount = 22
+
+[node name="Heal" type="Node" parent="."]
+script = ExtResource("6_44st6")
+
+[node name="Hit Rate" type="Node" parent="Heal"]
+script = ExtResource("7_3d1p6")
+
+[node name="Ability Effect Target" type="Node" parent="Heal"]
+script = ExtResource("8_ykesu")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("9_mcka3")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("10_2qfqn")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("8_ykesu")
+toggle = true
+
+[node name="Revive" type="Node" parent="."]
+script = ExtResource("11_v1k8i")
+percent = 0.25
+
+[node name="Hit Rate" type="Node" parent="Revive"]
+script = ExtResource("7_3d1p6")
+
+[node name="Ability Effect Target" type="Node" parent="Revive"]
+script = ExtResource("12_d44gt")

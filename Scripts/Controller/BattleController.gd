@@ -18,8 +18,6 @@ class_name BattleController
 var turn:Turn = Turn.new()
 var units:Array[Unit] = []
 
-var heroPrefab = preload("res://Prefabs/Hero.tscn")
-
 var currentTile:Tile: 
 	get: return board.GetTile(board.pos)
 

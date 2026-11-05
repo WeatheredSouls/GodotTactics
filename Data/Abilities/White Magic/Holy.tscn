@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://cofai4rvpks7o"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_3y7jf"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_2edqw"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="3_d5arl"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="4_3cv5q"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="5_xr4yp"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="6_pinqm"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="7_0lwfh"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="8_7xfsr"]
+
+[node name="Holy" type="Node"]
+script = ExtResource("1_3y7jf")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_2edqw")
+horizontal = 3
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_d5arl")
+horizontal = 1
+vertical = 1
+
+[node name="Magical Ability Power" type="Node" parent="."]
+script = ExtResource("4_3cv5q")
+level = 50
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("5_xr4yp")
+amount = 32
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("6_pinqm")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("7_0lwfh")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("8_7xfsr")

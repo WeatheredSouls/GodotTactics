@@ -7,14 +7,15 @@ var range: int:
 var jumpHeight: int:
 	get:
 		return stats.GetStat(StatTypes.Stat.JMP)
-var stats:Stats
-var unit: Unit
-var jumper: Node3D
-
-func _init():
-	unit = get_node("../")
-	jumper = get_node("../Jumper")
-	stats = get_node("../Stats")
+var unit: Unit:
+	get:
+		return get_node("../")
+var jumper: Node3D:
+	get:
+		return get_node("../Jumper")
+var stats:Stats:
+	get:
+		return get_node("../Stats")
 
 func GetTilesInRange(board: BoardCreator):
 	var retValue = board.Search(unit.tile, ExpandSearch)

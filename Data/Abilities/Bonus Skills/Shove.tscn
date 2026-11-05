@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm35402ckany7"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_wqc67"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_r5hb1"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/UnitAbilityArea.gd" id="3_v8nps"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/KnockbackAbilityEffect.gd" id="4_ofn8n"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="5_31l8j"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="6_222km"]
+
+[node name="Shove" type="Node"]
+script = ExtResource("1_wqc67")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_r5hb1")
+minH = 1
+vertical = 2
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_v8nps")
+
+[node name="Knockback" type="Node" parent="."]
+script = ExtResource("4_ofn8n")
+
+[node name="Hit Rate" type="Node" parent="Knockback"]
+script = ExtResource("5_31l8j")
+
+[node name="Ability Effect Target" type="Node" parent="Knockback"]
+script = ExtResource("6_222km")

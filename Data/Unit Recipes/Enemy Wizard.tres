@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitRecipe" load_steps=2 format=3 uid="uid://wlar6xl2omil"]
+
+[ext_resource type="Script" path="res://Scripts/Factory/UnitRecipe.gd" id="1_ahhmp"]
+
+[resource]
+script = ExtResource("1_ahhmp")
+model = "Monster"
+job = "Wizard"
+attack = "Common/Attack"
+abilityCatalog = "DemoCatalog"
+locomotion = 2
+alliance = 4

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UnitRecipe" load_steps=2 format=3 uid="uid://cgfne4lsvexea"]
+
+[ext_resource type="Script" path="res://Scripts/Factory/UnitRecipe.gd" id="1_5i2jl"]
+
+[resource]
+script = ExtResource("1_5i2jl")
+model = "Hero"
+job = "Rogue"
+attack = "Common/Attack"
+abilityCatalog = "DemoCatalog"
+locomotion = 0
+alliance = 2

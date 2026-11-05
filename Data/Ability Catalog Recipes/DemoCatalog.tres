@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AbilityCatalogRecipe" load_steps=6 format=3 uid="uid://c2bpvel3gfhau"]
+
+[ext_resource type="Script" path="res://Scripts/Factory/AbilityCatalogRecipe.gd" id="1_1n4a6"]
+[ext_resource type="Script" path="res://Scripts/Factory/Category.gd" id="1_13pa3"]
+
+[sub_resource type="Resource" id="Resource_myo05"]
+script = ExtResource("1_13pa3")
+name = "White Magic"
+entries = Array[String](["Cure", "Raise", "Holy"])
+
+[sub_resource type="Resource" id="Resource_h84ir"]
+script = ExtResource("1_13pa3")
+name = "Sagacity Skill"
+entries = Array[String](["Water", "Blind", "Drain"])
+
+[sub_resource type="Resource" id="Resource_b2stc"]
+script = ExtResource("1_13pa3")
+name = "Bonus Skills"
+entries = Array[String](["Earthquake", "Shove"])
+
+[resource]
+script = ExtResource("1_1n4a6")
+categories = Array[ExtResource("1_13pa3")]([SubResource("Resource_myo05"), SubResource("Resource_h84ir"), SubResource("Resource_b2stc")])

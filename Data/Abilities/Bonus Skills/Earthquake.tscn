@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlevg4r7chgvc"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_65t5e"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_wwo8p"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/LineAbilityArea.gd" id="3_uyvsc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="4_uewug"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/EarthquakeAbilityEffect.gd" id="5_s1ype"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="6_igo07"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/TileAbilityEffectTarget.gd" id="7_w1v1s"]
+
+[node name="Earthquake" type="Node"]
+script = ExtResource("1_65t5e")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_wwo8p")
+horizontal = 5
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_uyvsc")
+horizontal = 5
+vertical = 5
+extendPastTarget = true
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("4_uewug")
+amount = 7
+
+[node name="Deform Terrain" type="Node" parent="."]
+script = ExtResource("5_s1ype")
+
+[node name="Hit Rate" type="Node" parent="Deform Terrain"]
+script = ExtResource("6_igo07")
+
+[node name="Ability Effect Target" type="Node" parent="Deform Terrain"]
+script = ExtResource("7_w1v1s")

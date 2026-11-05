@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://cm05n5txao1w"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_nvk8g"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_jnr03"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="3_dx633"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="4_ldor6"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="5_jij24"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="6_jq85f"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="7_pcjxq"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="8_aqbqw"]
+
+[node name="Water" type="Node"]
+script = ExtResource("1_nvk8g")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_jnr03")
+horizontal = 3
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_dx633")
+horizontal = 1
+vertical = 2
+
+[node name="Magical Ability Power" type="Node" parent="."]
+script = ExtResource("4_ldor6")
+level = 35
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("5_jij24")
+amount = 12
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("6_jq85f")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("7_pcjxq")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("8_aqbqw")

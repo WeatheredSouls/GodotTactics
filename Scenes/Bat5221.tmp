@@ -1,0 +1,350 @@
+[gd_scene load_steps=75 format=3 uid="uid://db0rltrumescg"]
+
+[ext_resource type="Script" path="res://Scripts/Controller/BattleController.gd" id="1_jg3qk"]
+[ext_resource type="Script" path="res://Scripts/Controller/InputController.gd" id="2_6a0kt"]
+[ext_resource type="Script" path="res://Scripts/PreProduction/BoardCreator.gd" id="2_c7doe"]
+[ext_resource type="Script" path="res://Scripts/Common/State Machine/StateMachine.gd" id="2_lgpnl"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/InitBattleState.gd" id="3_nwvsw"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/MoveTargetState.gd" id="4_2n2ph"]
+[ext_resource type="Script" path="res://Scripts/Controller/CameraController.gd" id="4_85yja"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/SelectUnitState.gd" id="5_i2eso"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/MoveSequenceState.gd" id="6_xkkv4"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/CutSceneState.gd" id="7_hiiig"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/ActionSelectionState.gd" id="8_4ahfi"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/CommandSelectionState.gd" id="9_paokb"]
+[ext_resource type="Script" path="res://Scripts/Controller/ConversationController.gd" id="10_3i1al"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/CategorySelectionState.gd" id="10_6alih"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/ExploreState.gd" id="11_fj250"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/AbilityTargetState.gd" id="12_2punj"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/ConversationPanel.gd" id="12_3j4sj"]
+[ext_resource type="Script" path="res://Scripts/Common/UI/PanelAnchor.gd" id="13_4akxu"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/ConfirmAbilityTargetState.gd" id="13_acu00"]
+[ext_resource type="Texture2D" uid="uid://0tyk6cjeapi" path="res://Textures/UI/ConversationPanel.png" id="13_v33yy"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/PerformAbilityState.gd" id="14_32bbf"]
+[ext_resource type="Texture2D" uid="uid://biu741lehhl8s" path="res://Textures/UI/Avatar.png" id="14_ikhvj"]
+[ext_resource type="Script" path="res://Scripts/Controller/Battle States/EndFacingState.gd" id="15_b2fh0"]
+[ext_resource type="Texture2D" uid="uid://bqhgfy01bdleo" path="res://Textures/UI/MoreConversationArrow.png" id="15_ey8f6"]
+[ext_resource type="Script" path="res://Scripts/Controller/GameObjectPoolController.gd" id="17_qqbh6"]
+[ext_resource type="Script" path="res://Scripts/Controller/AbilityMenuPanelController.gd" id="18_mr0s1"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/AbilityMenuPanel.gd" id="19_b82uw"]
+[ext_resource type="PackedScene" uid="uid://dm4nqpjps53q" path="res://Prefabs/Ability Menu Entry.tscn" id="23_gewc1"]
+[ext_resource type="Texture2D" uid="uid://dlwruqnn3d2qp" path="res://Textures/UI/AbilityMenu.png" id="23_yonpl"]
+[ext_resource type="Script" path="res://Scripts/Controller/StatPanelController.gd" id="26_nwb25"]
+[ext_resource type="Texture2D" uid="uid://dl1xtgj7d3d27" path="res://Textures/UI/BlueAttackPanel.png" id="26_sbods"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/StatPanel.gd" id="27_e2b2e"]
+[ext_resource type="Texture2D" uid="uid://devbmisnl337" path="res://Textures/UI/RedAttackPanel.png" id="29_rgavg"]
+[ext_resource type="Script" path="res://Scripts/Controller/TurnOrderController.gd" id="34_opnmc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/HitSuccessIndicator.gd" id="35_joq03"]
+[ext_resource type="Script" path="res://Scripts/Common/UI/LayoutAnchor.gd" id="36_00mtv"]
+[ext_resource type="Texture2D" uid="uid://lm3oejxnfwbl" path="res://Textures/UI/AttackArrowBacker.png" id="37_trv01"]
+[ext_resource type="Texture2D" uid="uid://cqxxq4gd45hlu" path="res://Textures/UI/AttackArrowFill.png" id="38_bmghk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvobm"]
+
+[sub_resource type="Resource" id="Resource_i7d1i"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide Bottom"
+myAnchor = 3
+parentAnchor = 2
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_8of27"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide Top"
+myAnchor = 1
+parentAnchor = 0
+offset = Vector2(0, 20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_5ckyl"]
+script = ExtResource("13_4akxu")
+anchorName = "Show Bottom"
+myAnchor = 2
+parentAnchor = 2
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_glpv7"]
+script = ExtResource("13_4akxu")
+anchorName = "Show Top"
+myAnchor = 0
+parentAnchor = 0
+offset = Vector2(0, 20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Animation" id="Animation_nrmuj"]
+resource_name = "Left Arrow Bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(262, 210), Vector2(262, 220)]
+}
+
+[sub_resource type="Animation" id="Animation_vdj6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(262, 210)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ca0bq"]
+_data = {
+"Left Arrow Bounce": SubResource("Animation_nrmuj"),
+"RESET": SubResource("Animation_vdj6p")
+}
+
+[sub_resource type="Resource" id="Resource_fagxq"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide Bottom"
+myAnchor = 2
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_jep18"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide Top"
+myAnchor = 0
+parentAnchor = 1
+offset = Vector2(0, 20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_wamtl"]
+script = ExtResource("13_4akxu")
+anchorName = "Show Bottom"
+myAnchor = 3
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_ojajp"]
+script = ExtResource("13_4akxu")
+anchorName = "Show Top"
+myAnchor = 1
+parentAnchor = 1
+offset = Vector2(0, 20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Animation" id="Animation_5yy2j"]
+resource_name = "Right Arrow Bounce"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(170, 210), Vector2(170, 220)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4uix"]
+_data = {
+"Right Arrow Bounce": SubResource("Animation_5yy2j")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_38ts8"]
+content_margin_left = 18.0
+content_margin_top = 13.0
+content_margin_right = 12.0
+content_margin_bottom = 16.0
+texture = ExtResource("23_yonpl")
+texture_margin_left = 44.0
+texture_margin_top = 42.0
+texture_margin_right = 1.0
+texture_margin_bottom = 32.0
+
+[sub_resource type="Resource" id="Resource_b8k3n"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide"
+myAnchor = 2
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_gqccu"]
+script = ExtResource("13_4akxu")
+anchorName = "Show"
+myAnchor = 3
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 0
+anchorEase = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0fsw"]
+
+[sub_resource type="Resource" id="Resource_nefye"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide"
+myAnchor = 3
+parentAnchor = 2
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 4
+anchorEase = 1
+
+[sub_resource type="Resource" id="Resource_7e3hf"]
+script = ExtResource("13_4akxu")
+anchorName = "Show"
+myAnchor = 2
+parentAnchor = 2
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 4
+anchorEase = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_bter3"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1wcna"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cc2e0"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qmn47"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a66u4"]
+
+[sub_resource type="Resource" id="Resource_ma5hp"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide"
+myAnchor = 2
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 4
+anchorEase = 1
+
+[sub_resource type="Resource" id="Resource_kt1p0"]
+script = ExtResource("13_4akxu")
+anchorName = "Show"
+myAnchor = 3
+parentAnchor = 3
+offset = Vector2(0, -20)
+duration = 0.5
+trans = 4
+anchorEase = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_0isu0"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_04rap"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x1vdc"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_aejep"]
+font_size = 20
+outline_size = 5
+outline_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="Resource" id="Resource_cbnv3"]
+script = ExtResource("13_4akxu")
+anchorName = "Hide"
+myAnchor = 5
+parentAnchor = 7
+offset = Vector2(0, 15)
+duration = 0.5
+trans = 4
+anchorEase = 2
+
+[sub_resource type="Resource" id="Resource_wxptb"]
+script = ExtResource("13_4akxu")
+anchorName = "Show"
+myAnchor = 7
+parentAnchor = 7
+offset = Vector2(0, -130)
+duration = 0.5
+trans = 4
+anchorEase = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lw7y6"]
+
+[sub_resource type="SystemFont" id="SystemFont_8hwfn"]
+font_names = PackedStringArray("Arial")
+font_italic = true
+font_weight = 575
+
+[sub_resource type="LabelSettings" id="LabelSettings_gaw88"]
+font = SubResource("SystemFont_8hwfn")
+font_size = 30
+font_color = Color(0.568627, 0.133333, 0.160784, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 0.501961)
+
+[node name="Battle" type="Node3D"]
+
+[node name="Battle Controller" type="Node" parent="."]
+script = ExtResource("1_jg3qk")
+board = Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("2_c7doe"),"width":10,"depth":10,"height":8,"pos":Vector2i(0, 0),"_oldPos":Vector2i(0, 0),"tiles":{},"tileViewPrefab":Resource("res://Prefabs/Tile.tscn"),"tileSelectionIndicatorPrefab":Resource("res://Prefabs/Tile Selection Indicator.tscn"),"marker":Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":null)
+,"selectedTileColor":Color(0, 1, 1, 1),"defaultTileColor":Color(1, 1, 1, 1),"_random":Object(RandomNumberGenerator,"seed":5458588424099245593,"state":-7950188217972925705,"script":null)
+,"savePath":"res://Data/Levels/","fileName":"defaultMap.txt","_min":Vector2i(999999, 999999),"_max":Vector2i(-999999, -999999),"min":Vector2i(999999, 999999),"max":Vector2i(-999999, -999999))
+
+inputController = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("2_6a0kt"))
+
+cameraController = Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("4_85yja"),"_followSpeed":3.0)
+
+conversationController = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":ExtResource("10_3i1al"),"leftPanel":Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":0,"anchor_left":0.0,"anchor_top":0.0,"anchor_right":0.0,"anchor_bottom":0.0,"offset_left":0.0,"offset_top":0.0,"offset_right":465.0,"offset_bottom":227.0,"grow_horizontal":1,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","theme_override_styles/panel":SubResource("StyleBoxEmpty_fvobm"),"script":ExtResource("12_3j4sj"),"message":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":2,"anchor_left":0.0,"anchor_top":1.0,"anchor_right":0.0,"anchor_bottom":1.0,"offset_left":136.0,"offset_top":-130.0,"offset_right":420.0,"offset_bottom":-10.0,"grow_horizontal":1,"grow_vertical":0,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","theme_override_colors/font_color":Color(0.407843, 0.172549, 0.0823529, 1),"theme_override_font_sizes/font_size":25,"text":"Here is a lot of text to read. Use the arrow for more.","label_settings":null,"horizontal_alignment":1,"vertical_alignment":1,"autowrap_mode":2,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+,"speaker":Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":2,"anchor_left":0.0,"anchor_top":1.0,"anchor_right":0.0,"anchor_bottom":1.0,"offset_left":0.0,"offset_top":-227.0,"offset_right":154.0,"offset_bottom":0.0,"grow_horizontal":1,"grow_vertical":0,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","texture":ExtResource("14_ikhvj"),"expand_mode":0,"stretch_mode":0,"flip_h":true,"flip_v":false,"script":null)
+,"arrow":Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":2,"anchor_left":0.0,"anchor_top":1.0,"anchor_right":0.0,"anchor_bottom":1.0,"offset_left":262.0,"offset_top":-17.0,"offset_right":295.0,"offset_bottom":7.0,"grow_horizontal":1,"grow_vertical":0,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":1,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","texture":ExtResource("15_ey8f6"),"expand_mode":0,"stretch_mode":0,"flip_h":false,"flip_v":false,"script":null)
+,"anchorList":Array[ExtResource("13_4akxu")]([SubResource("Resource_i7d1i"), SubResource("Resource_8of27"), SubResource("Resource_5ckyl"), SubResource("Resource_glpv7")]))
+,"rightPanel":Object(Panel,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":3,"anchors_preset":1,"anchor_left":1.0,"anchor_top":0.0,"anchor_right":1.0,"anchor_bottom":0.0,"offset_left":-465.0,"offset_top":0.0,"offset_right":0.0,"offset_bottom":227.0,"grow_horizontal":0,"grow_vertical":1,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":0,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","theme_override_styles/panel":SubResource("StyleBoxEmpty_fvobm"),"script":ExtResource("12_3j4sj"),"message":Object(Label,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":3,"anchor_left":1.0,"anchor_top":1.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":-420.0,"offset_top":-130.0,"offset_right":-136.0,"offset_bottom":-10.0,"grow_horizontal":0,"grow_vertical":0,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":4,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_numeral_system":true,"tooltip_text":"","focus_neighbor_left":NodePath(""),"focus_neighbor_top":NodePath(""),"focus_neighbor_right":NodePath(""),"focus_neighbor_bottom":NodePath(""),"focus_next":NodePath(""),"focus_previous":NodePath(""),"focus_mode":0,"mouse_filter":2,"mouse_force_pass_scroll_events":true,"mouse_default_cursor_shape":0,"shortcut_context":null,"theme":null,"theme_type_variation":&"","theme_override_colors/font_color":Color(0.407843, 0.172549, 0.0823529, 1),"theme_override_font_sizes/font_size":25,"text":"Here is a lot of text to read. Use the arrow for more.","label_settings":null,"horizontal_alignment":1,"vertical_alignment":1,"autowrap_mode":2,"justification_flags":163,"clip_text":false,"text_overrun_behavior":0,"uppercase":false,"tab_stops":PackedFloat32Array(),"lines_skipped":0,"max_lines_visible":-1,"visible_characters":-1,"visible_characters_behavior":0,"visible_ratio":1.0,"text_direction":0,"language":"","structured_text_bidi_override":0,"structured_text_bidi_override_options":[],"script":null)
+,"speaker":Object(TextureRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":0,"layout_mode":1,"anchors_preset":3,"anchor_left":1.0,"anchor_top":1.0,"anchor_right":1.0,"anchor_bottom":1.0,"offset_left":-154.0,"offset_top":-227.0,"offset_right":0.0,"offset_bottom":0.0,"grow_horizontal":0,"grow_vertical":0,"rotation":0.0,"scale":Vector2(1, 1),"pivot_offset":Vector2(0, 0),"size_flags_horizontal":1,"size_flags_vertical":1,"size_flags_stretch_ratio":1.0,"auto_translate":true,"localize_

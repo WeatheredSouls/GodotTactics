@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://g3ocei2bunv6"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_gm1xc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_8a3vv"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="3_0hkvj"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/PhysicalAbilityPower.gd" id="4_arrkc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="5_q2ate"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="6_niq05"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="7_4s7dm"]
+
+[node name="Attack" type="Node"]
+script = ExtResource("1_gm1xc")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_8a3vv")
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_0hkvj")
+horizontal = 0
+vertical = 5
+
+[node name="Physical Ability Power" type="Node" parent="."]
+script = ExtResource("4_arrkc")
+level = 45
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("5_q2ate")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("6_niq05")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("7_4s7dm")

@@ -22,49 +22,30 @@ func Init():
 	
 	_owner.stateMachine.ChangeState(cutSceneState)
 
-func SpawnTestUnits():	
-	var jobList:Array[String] = ["Rogue", "Warrior", "Wizard"]
-	var path = "res://Data/Jobs/"
+func SpawnTestUnits():
+	var recipes:Array[String] = [
+		"Alaois",
+		"Hania",
+		"Kamau",
+		"Enemy Rogue",
+		"Enemy Warrior",
+		"Enemy Wizard"
+	]
 	
-	for i in jobList.size():
-		var unit:Unit = _owner.heroPrefab.instantiate()
-		unit.name = jobList[i]
-		_owner.add_child(unit)
+	var locations:Array[Tile]
+	locations.assign(board.tiles.values())
+	for recipe in recipes:
+		var level = randi_range(9,11)
+		var unit:Unit = UnitFactory.Create(recipe, level, _owner)
 		
-		var s:Stats = Stats.new()
-		unit.add_child(s)
-		s.SetStat(StatTypes.Stat.LVL, 1)
-		s.name = "Stats"		
+		var random = randi_range(0, locations.size() - 1)
+		var randomTile:Tile = locations[random]
+		locations.remove_at(random)
 		
-		var fullPath:String = path + jobList[i] + ".tscn"
-		var scene:PackedScene = load(fullPath)
-		var job:Job = scene.instantiate()
-		unit.add_child(job)
-		job.Employ()
-		job.LoadDefaultStats()
-		
-		var p:Vector2i = Vector2i(_owner.board.tiles.keys()[i].x,_owner.board.tiles.keys()[i].y)
-		
-		unit.Place(_owner.board.GetTile(p))
+		unit.Place( randomTile)
+		unit.dir = randi_range(0,3)
 		unit.Match()
-
-		var m = unit.get_node("Movement")
-		m.set_script(WalkMovement)
-		m.range = 5
-		m.jumpHeight = 1
-		m.set_process(true)
-		
-		var health:Health = Health.new()
-		health.name = "Health"
-		unit.add_child(health)
-
-		var mana:Mana = Mana.new()
-		mana.name = "Mana"
-		unit.add_child(mana)
-		
-		var rank = Rank.new()
-		rank.name = "Rank"
-		unit.add_child(rank)
-		rank.Init(10)
 		
 		units.append(unit)
+	
+	SelectTile(units[0].tile.pos)

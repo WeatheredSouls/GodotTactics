@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://ccnqmylf1ybd5"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_5ec32"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_gvtve"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/UnitAbilityArea.gd" id="3_4hq06"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="4_8y5sc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/InflictAbilityEffect.gd" id="5_y5frf"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Status/Effects/BlindStatusEffect.gd" id="6_l3yre"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/STypeHitRate.gd" id="7_h36eo"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="8_g4cru"]
+
+[node name="Blind" type="Node"]
+script = ExtResource("1_5ec32")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_gvtve")
+horizontal = 4
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_4hq06")
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("4_8y5sc")
+amount = 12
+
+[node name="Inflict Blind" type="Node" parent="."]
+script = ExtResource("5_y5frf")
+status_effect = ExtResource("6_l3yre")
+effect_name = "Blind"
+duration = 10
+
+[node name="Hit Rate" type="Node" parent="Inflict Blind"]
+script = ExtResource("7_h36eo")
+
+[node name="Ability Effect Target" type="Node" parent="Inflict Blind"]
+script = ExtResource("8_g4cru")

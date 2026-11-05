@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://whcprrstqmtn"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_mcyn8"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_8ptfe"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/SpecifyAbilityArea.gd" id="3_hc4pe"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="4_62doy"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="5_ywhbc"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/HealAbilityEffect.gd" id="6_rbshu"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="7_h24to"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/UndeadAbilityEffectTarget.gd" id="8_hu7q3"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="9_thsg5"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="10_thca7"]
+
+[node name="Cure" type="Node"]
+script = ExtResource("1_mcyn8")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_8ptfe")
+horizontal = 4
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_hc4pe")
+horizontal = 1
+vertical = 1
+
+[node name="Magical Ability Power" type="Node" parent="."]
+script = ExtResource("4_62doy")
+level = 40
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("5_ywhbc")
+amount = 6
+
+[node name="Heal" type="Node" parent="."]
+script = ExtResource("6_rbshu")
+
+[node name="Hit Rate" type="Node" parent="Heal"]
+script = ExtResource("7_h24to")
+
+[node name="Ability Effect Target" type="Node" parent="Heal"]
+script = ExtResource("8_hu7q3")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("9_thsg5")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("10_thca7")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("8_hu7q3")
+toggle = true

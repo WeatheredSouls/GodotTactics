@@ -1,0 +1,50 @@
+[gd_scene load_steps=11 format=3 uid="uid://doamq1q4hb0ip"]
+
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Ability.gd" id="1_q00ob"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Range/ConstantAbilityRange.gd" id="2_mdtml"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Area of Effect/UnitAbilityArea.gd" id="3_tus1q"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Power/MagicalAbilityPower.gd" id="4_ajprm"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/AbilityMagicCost.gd" id="5_4cohx"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/DamageAbilityEffect.gd" id="6_w0frg"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/ATypeHitRate.gd" id="7_agmcp"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effect Target/DefaultAbilityEffectTarget.gd" id="8_l22tf"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Effects/AbsorbDamageAbilityEffect.gd" id="9_aibc8"]
+[ext_resource type="Script" path="res://Scripts/View Model Component/Ability/Hit Rate/FullTypeHitRate.gd" id="10_xkcqm"]
+
+[node name="Drain" type="Node"]
+script = ExtResource("1_q00ob")
+
+[node name="Ability Range" type="Node" parent="."]
+script = ExtResource("2_mdtml")
+horizontal = 4
+minH = 1
+
+[node name="Ability Area" type="Node" parent="."]
+script = ExtResource("3_tus1q")
+
+[node name="Magical Ability Power" type="Node" parent="."]
+script = ExtResource("4_ajprm")
+level = 30
+
+[node name="Ability Magic Cost" type="Node" parent="."]
+script = ExtResource("5_4cohx")
+amount = 12
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("6_w0frg")
+
+[node name="Hit Rate" type="Node" parent="Damage"]
+script = ExtResource("7_agmcp")
+
+[node name="Ability Effect Target" type="Node" parent="Damage"]
+script = ExtResource("8_l22tf")
+
+[node name="Absorb" type="Node" parent="." node_paths=PackedStringArray("effect")]
+script = ExtResource("9_aibc8")
+effect = NodePath("../Damage")
+
+[node name="Hit Rate" type="Node" parent="Absorb"]
+script = ExtResource("10_xkcqm")
+
+[node name="Ability Effect Target" type="Node" parent="Absorb"]
+script = ExtResource("8_l22tf")
